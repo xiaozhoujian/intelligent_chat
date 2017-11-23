@@ -42,7 +42,7 @@ layui.use('layim', function(layim){
 
    //建立WebSocket通讯
   //注意：如果你要兼容ie8+，建议你采用 socket.io 的版本。下面是以原生WS为例
-  var socket = io('ws://localhost:3000');
+  var socket = io('ws://localhost:8000');
   // 监听发送的消息 
   layim.on('sendMessage', function(data){
     // var mine = res.mine; // Include my information & my sent message
