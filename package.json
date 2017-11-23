@@ -1,0 +1,15 @@
+{
+  "name": "socket-chat-example",
+  "version": "0.0.1",
+  "description": "my first socket.io app",
+  "dependencies": {
+    "express": "^4.16.2",
+    "fetch": "^1.1.0",
+    "ioredis": "^3.2.1",
+    "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.2.1",
+    "redis": "^2.8.0",
+    "socket.io": "^2.0.4",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

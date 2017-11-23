@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>最简单的socket.io前端示例</title>
+</head>
+<body>
+    
+<script src="./socket.io.js"></script>
+<script>
+    layui.use('layim', function() {
+    var layim = layui.layim;
+    var socket = io('ws://localhost:3000');
+    //连接成功时触发
+    socket.on('connect', function() {
+        layimStatus = 'connect';
+        socket.emit('join', '一个标示');
+    });
+    //监听reply消息标示
+    socket.on('reply', function(data) {
+        //把接收到的消息转发到聊天窗口
+        layim.getMessage(data); //data即你发送消息传递的数据（阅读：监听发送的消息）
+    });
+    //监听join消息标示
+    socket.on('join', function(msg) {
+        layer.msg(msg, {
+            icon: 1
+        });
+    });
+    //断开链接
+    socket.on('disconnect', function() {
+        layimStatus = 'disconnect';
+        layer.msg('聊天窗口链接失败,请刷新页面重试!', {
+            icon: 2,
+            time: 3000
+        });
+    });
+    socket.on('error', function() {
+        layimStatus = 'disconnect';
+        layer.msg('聊天窗口链接失败,请刷新页面重试!', {
+            icon: 2,
+            time: 3000
+        });
+    });
+    socket.on('reconnect', function() {
+        layimStatus = 'connect';
+    });
+    layim.config({
+        brief: true //简约模式，不显示主面板
+        ,
+        title: '客服面板',
+        min: true,
+        mine: {
+            avatar: 'images/机器人头像.jpg',
+            username: '我是客服',
+            id: 1
+        },
+        maxLength: 500 //最长发送字符长度
+    });
+    layim.on('sendMessage', function(res) {
+        console.debug('sendMessage-res', res);
+        res['to']['msgid'] = replyMsgId;
+        socket.emit('reply', res);
+        replyMsgId = 0;
+    });
+    var $ = layui.jquery,
+        active = {
+            reply: function(username, openid, head, msgid) {
+                layim.chat({
+                    name: username,
+                    type: 'kefu',
+                    avatar: head,
+                    id: openid
+                });
+            }
+        };
+    $(document).on('click', '.reply', function() {
+        //获取用户名称
+        var t = $(this);
+        replyMsgId = t.data('id');
+        active.reply(t.data('name'), t.data('openid'), t.data('head'));
+    });
+});
+</script>
+</body>
+</html>
