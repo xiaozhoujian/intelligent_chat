@@ -32,6 +32,7 @@ io.on('connection', function(socket){
       return response.json()
     }).then(function(detail) {
         To.content = detail.text;
+	To.name = "Intelligent_Chat";
         socket.emit('reply', To);
         // layim.getMessage(To);
     });
@@ -56,6 +57,6 @@ io.on('connection', function(socket){
     // To.mine = false;
     // To.content = ret.text;
 
-http.listen(8080, function(){
-  console.log('listening on *: 8080');
+http.listen(8000, function(){
+  console.log('listening on *: 8000');
 }); 

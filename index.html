@@ -8,11 +8,8 @@
 <link rel="stylesheet" href="dist/css/layui.css" media="all">
 </head>
 <body>
-<!-- <script src="https://cdn.ronghub.com/RongIMLib-2.2.8.min.js"></script>   -->
 <script type="text/javascript" src="dist/layui.js"></script>
-<!-- <script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script> -->
 <script type="text/javascript" src="dist/lay/modules/jquery.js"></script>
-<!-- <script src="index.js" type="text/javascript"></script> -->
 
 
 <!-- <script type="text/javascript" src="index.js"></script> -->
@@ -42,7 +39,7 @@ layui.use('layim', function(layim){
 
    //建立WebSocket通讯
   //注意：如果你要兼容ie8+，建议你采用 socket.io 的版本。下面是以原生WS为例
-  var socket = io('ws://localhost:8080');
+  var socket = io();
   // 监听发送的消息 
   layim.on('sendMessage', function(data){
     // var mine = res.mine; // Include my information & my sent message
@@ -57,6 +54,7 @@ layui.use('layim', function(layim){
   // 监听接受的消息
   socket.on('reply', function(data) {
     data.mine = false;
+    data.username = "Intelligent_Chat";
     layim.getMessage(data);
   });
   
