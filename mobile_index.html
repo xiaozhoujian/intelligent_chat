@@ -1,12 +1,27 @@
 <!doctype html>
 <html>
 <head>
-<!-- 
- -->
-<meta charset="utf-8">
-<title>Intelligent_chat</title>
-<link rel="stylesheet" href="dist/css/layui.css" media="all">
+  <meta charset="utf-8">
+  <title>Intelligent_chat</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- <link rel="stylesheet" href="dist/css/layui.mobile.css" media="all"> -->
+  <link rel="stylesheet" href="dist/css/layui.css" media="all"/>
+  <link rel="stylesheet" href="dist/css/global.css" media="all"/>
+  <link rel="stylesheet" href="dist/mycss/chat.css" media="all"/>
+  <style type="text/css">
+    pre {
+        display: inline;
+    }
+    .select {
+        color: #0000FF;
+        text-decoration: none;
+        cursor: hand;
+    } 
+  </style>
 </head>
+
 <body>
 <script type="text/javascript" src="dist/layui.js"></script>
 <script type="text/javascript" src="dist/lay/modules/jquery.js"></script>
@@ -16,7 +31,9 @@
 <script src="js/socket.io.js"> </script>
 <!-- <script type="text/javascript" src=""></script> -->
 <script>
-layui.use('layim', function(layim){
+layui.use('mobile', function(layim) {
+  var mobile = layui.mobile
+  ,layim = mobile.layim;
   layim.config({
     init: {
       // 配置客户信息
@@ -28,9 +45,11 @@ layui.use('layim', function(layim){
       }
     }
     ,brief: true //是否简约模式（如果true则不显示主面板）
+    // ,isNewFriend = false
     ,initSkin: 'IC_background.jpeg'
-    ,chatLog: layui.cache.dir + 'css/modules/layim/html/chatLog.html' //聊天记录页面地址，若不开启，剔除该项即可
-  }).chat({
+    // ,chatLog: layui.cache.dir + 'css/modules/layim/html/chatLog.html' //聊天记录页面地址，若不开启，剔除该项即可
+  });
+  layim.chat({
     name: 'Intelligent_Chat'
     ,type: 'kefu'
     ,avatar: 'images/机器人头像.jpg'
