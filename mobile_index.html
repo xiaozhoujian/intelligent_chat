@@ -8,18 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- <link rel="stylesheet" href="dist/css/layui.mobile.css" media="all"> -->
   <link rel="stylesheet" href="dist/css/layui.css" media="all"/>
-  <link rel="stylesheet" href="dist/css/global.css" media="all"/>
-  <link rel="stylesheet" href="dist/mycss/chat.css" media="all"/>
-  <style type="text/css">
-    pre {
-        display: inline;
-    }
-    .select {
-        color: #0000FF;
-        text-decoration: none;
-        cursor: hand;
-    } 
-  </style>
 </head>
 
 <body>
@@ -31,6 +19,8 @@
 <script src="js/socket.io.js"> </script>
 <!-- <script type="text/javascript" src=""></script> -->
 <script>
+
+
 layui.use('mobile', function(layim) {
   var mobile = layui.mobile
   ,layim = mobile.layim;
@@ -49,12 +39,16 @@ layui.use('mobile', function(layim) {
     ,initSkin: 'IC_background.jpeg'
     // ,chatLog: layui.cache.dir + 'css/modules/layim/html/chatLog.html' //聊天记录页面地址，若不开启，剔除该项即可
   });
+
   layim.chat({
-    name: 'Intelligent_Chat'
+    name: '智能医疗助手'
     ,type: 'kefu'
     ,avatar: 'images/机器人头像.jpg'
     ,id: -2
   });
+  var content = document.getElementsByTagName('i');
+  content[0].remove();
+  // alert(content[0].innerHTML);
   // layim.setChatMax();
    //建立WebSocket通讯
   //注意：如果你要兼容ie8+，建议你采用 socket.io 的版本。下面是以原生WS为例
@@ -74,12 +68,18 @@ layui.use('mobile', function(layim) {
   socket.on('reply', function(data) {
     layim.setChatStatus('<span style="color:#FF5722;"></span>');
     data.mine = false;
-    data.username = "Intelligent_Chat";
+    data.username = "智能医疗助手";
     layim.getMessage(data);
   });
   
 });
+
 </script>
 
 </body>
+<style type="text/css" media="screen">
+  .layim-title {
+    text-align: center;
+  }
+</style>
 </html>

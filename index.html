@@ -14,8 +14,19 @@
 
 <!-- <script type="text/javascript" src="index.js"></script> -->
 <script src="js/socket.io.js"> </script>
-<!-- <script type="text/javascript" src=""></script> -->
 <script>
+
+if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){
+    if(window.location.href.indexOf("?mobile")<0) {
+        try{
+            if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
+                console.log("Mobile")
+                window.location.href = "http://172.16.162.100:8000/mobile_index.html";
+            }
+        }catch(e){}
+    }
+}
+
 layui.use('layim', function(layim){
   layim.config({
     init: {
@@ -31,7 +42,7 @@ layui.use('layim', function(layim){
     ,initSkin: 'IC_background.jpeg'
     ,chatLog: layui.cache.dir + 'css/modules/layim/html/chatLog.html' //聊天记录页面地址，若不开启，剔除该项即可
   }).chat({
-    name: 'Intelligent_Chat'
+    name: '智能医疗助手'
     ,type: 'kefu'
     ,avatar: 'images/机器人头像.jpg'
     ,id: -2
@@ -55,7 +66,7 @@ layui.use('layim', function(layim){
   socket.on('reply', function(data) {
     layim.setChatStatus('<span style="color:#FF5722;"></span>');
     data.mine = false;
-    data.username = "Intelligent_Chat";
+    data.username = "智能医疗助手";
     layim.getMessage(data);
   });
   
